@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:munch2/domain/usecases/add_item_to_cart.dart';
+// import 'package:munch2/domain/usecases/add_item_to_cart.dart';
 import '../../widgets/food_feed_card.dart';
 import '../../mock/mock_food.dart';
+import '../../state/cart_notifier.dart';
+import '../../../domain/entities/cart_item.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -19,7 +21,8 @@ class HomeScreen extends StatelessWidget {
           return FoodFeedCard(
             food: food,
             onAddToCart: () {
-              // UI ONLY – logic comes later
+              // Add one unit of this food to the global cart
+              cartNotifier.addItem(CartItem(item: food, quantity: 1));
             },
           );
         },
