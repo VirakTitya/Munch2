@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:munch2/domain/usecases/add_item_to_cart.dart';
 import '../../widgets/food_feed_card.dart';
 import '../../mock/mock_food.dart';
-import '../../widgets/bottom_nav.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -24,7 +24,6 @@ class HomeScreen extends StatelessWidget {
           );
         },
       ),
-      bottomNavigationBar: const BottomNav(currentIndex: 0),
     );
   }
 }
