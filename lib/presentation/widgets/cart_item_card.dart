@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
+import '../../domain/entities/cart_item.dart';
+import '../state/cart_notifier.dart';
+
 class CartItemCard extends StatelessWidget {
-  const CartItemCard({super.key});
+  final CartItem cartItem;
+
+  const CartItemCard({super.key, required this.cartItem});
 
   @override
   Widget build(BuildContext context) {
@@ -21,44 +26,57 @@ class CartItemCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Container(
-            width: 60,
-            height: 60,
-            decoration: BoxDecoration(
-              color: Colors.orange.shade100,
-              borderRadius: BorderRadius.circular(10),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: SizedBox(
+              width: 60,
+              height: 60,
+              child: Image.network(
+                cartItem.item.imageUrl,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) => Container(
+                  color: Colors.orange.shade100,
+                  child: const Icon(Icons.fastfood),
+                ),
+              ),
             ),
-            child: const Icon(Icons.fastfood),
           ),
           const SizedBox(width: 12),
 
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
+              children: [
                 Text(
-                  'Chicken Burger',
-                  style: TextStyle(
+                  cartItem.item.name,
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 Text(
-                  '\$6.50',
-                  style: TextStyle(color: Colors.grey),
+                  '\$${(cartItem.item.price * cartItem.quantity).toStringAsFixed(2)}',
+                  style: const TextStyle(color: Colors.grey),
                 ),
               ],
             ),
           ),
 
-          // quantity (UI only)
+          // quantity controls
           Row(
-            children: const [
-              Icon(Icons.remove_circle_outline),
-              SizedBox(width: 8),
-              Text('1'),
-              SizedBox(width: 8),
-              Icon(Icons.add_circle_outline),
+            children: [
+              IconButton(
+                icon: const Icon(Icons.remove_circle_outline),
+                onPressed: () => cartNotifier.decrement(cartItem.item.id),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                child: Text('${cartItem.quantity}'),
+              ),
+              IconButton(
+                icon: const Icon(Icons.add_circle_outline),
+                onPressed: () => cartNotifier.increment(cartItem.item.id),
+              ),
             ],
           ),
         ],
