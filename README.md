@@ -1,6 +1,6 @@
-# munch2
+# Munch Munch
 
-A new Flutter project.
+A TikTok-inspired food delivery app that reimagines food discovery through an engaging vertical video-style feed, making ordering food feel like scrolling social media.
 
 ## Getting Started
 
