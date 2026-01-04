@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../widgets/order_card.dart';
+import 'package:munch2/presentation/widgets/order_cart.dart';
 
 class OrdersScreen extends StatelessWidget {
   const OrdersScreen({super.key});

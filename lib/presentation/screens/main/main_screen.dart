@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:munch2/presentation/screens/order/order_screen.dart';
 
 // screens
 import '../home/home_screen.dart';
 import '../search/search_screen.dart';
 import '../cart/cart_screen.dart';
-<<<<<<< HEAD
-// import '../orders/orders_screen.dart';
-=======
-// import '../orders/order_screen.dart';
->>>>>>> e2db759995fa554ddc40347d50156bce7d4742df
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -24,7 +20,7 @@ class _MainScreenState extends State<MainScreen> {
     HomeScreen(),
     SearchScreen(),
     CartScreen(),
-    // OrdersScreen(),
+    OrdersScreen(),
   ];
 
   @override

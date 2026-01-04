@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-<<<<<<< HEAD
-class CartItemCard extends StatelessWidget {
-  const CartItemCard({super.key});
-=======
 import '../../domain/entities/cart_item.dart';
 import '../state/cart_notifier.dart';
 
@@ -11,7 +7,6 @@ class CartItemCard extends StatelessWidget {
   final CartItem cartItem;
 
   const CartItemCard({super.key, required this.cartItem});
->>>>>>> e2db759995fa554ddc40347d50156bce7d4742df
 
   @override
   Widget build(BuildContext context) {
@@ -31,16 +26,6 @@ class CartItemCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-<<<<<<< HEAD
-          Container(
-            width: 60,
-            height: 60,
-            decoration: BoxDecoration(
-              color: Colors.orange.shade100,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: const Icon(Icons.fastfood),
-=======
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: SizedBox(
@@ -55,26 +40,12 @@ class CartItemCard extends StatelessWidget {
                 ),
               ),
             ),
->>>>>>> e2db759995fa554ddc40347d50156bce7d4742df
           ),
           const SizedBox(width: 12),
 
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-<<<<<<< HEAD
-              children: const [
-                Text(
-                  'Chicken Burger',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 4),
-                Text(
-                  '\$6.50',
-                  style: TextStyle(color: Colors.grey),
-=======
               children: [
                 Text(
                   cartItem.item.name,
@@ -86,22 +57,11 @@ class CartItemCard extends StatelessWidget {
                 Text(
                   '\$${(cartItem.item.price * cartItem.quantity).toStringAsFixed(2)}',
                   style: const TextStyle(color: Colors.grey),
->>>>>>> e2db759995fa554ddc40347d50156bce7d4742df
                 ),
               ],
             ),
           ),
 
-<<<<<<< HEAD
-          // quantity (UI only)
-          Row(
-            children: const [
-              Icon(Icons.remove_circle_outline),
-              SizedBox(width: 8),
-              Text('1'),
-              SizedBox(width: 8),
-              Icon(Icons.add_circle_outline),
-=======
           // quantity controls
           Row(
             children: [
@@ -117,7 +77,6 @@ class CartItemCard extends StatelessWidget {
                 icon: const Icon(Icons.add_circle_outline),
                 onPressed: () => cartNotifier.increment(cartItem.item.id),
               ),
->>>>>>> e2db759995fa554ddc40347d50156bce7d4742df
             ],
           ),
         ],

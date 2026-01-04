@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-import 'package:munch2/domain/usecases/add_item_to_cart.dart';
-import '../../widgets/food_feed_card.dart';
-import '../../mock/mock_food.dart';
-=======
 // import 'package:munch2/domain/usecases/add_item_to_cart.dart';
 import '../../widgets/food_feed_card.dart';
 import '../../mock/mock_food.dart';
 import '../../state/cart_notifier.dart';
 import '../../../domain/entities/cart_item.dart';
->>>>>>> e2db759995fa554ddc40347d50156bce7d4742df
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
