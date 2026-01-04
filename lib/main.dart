@@ -15,4 +15,8 @@ class MyApp extends StatelessWidget {
       home: MainScreen(), 
     );
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> e2db759995fa554ddc40347d50156bce7d4742df
