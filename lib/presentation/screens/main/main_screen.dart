@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:munch2/presentation/screens/cart/cart_screen';
 
 // screens
 import '../home/home_screen.dart';
 import '../search/search_screen.dart';
+import '../cart/cart_screen.dart';
 // import '../orders/orders_screen.dart';
 
 class MainScreen extends StatefulWidget {
