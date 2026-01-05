@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:munch2/presentation/widgets/order_cart.dart';
+import '../../widgets/order_cart.dart';
+import '../../state/order_notifier.dart';
 
 class OrdersScreen extends StatelessWidget {
   const OrdersScreen({super.key});
@@ -22,11 +23,21 @@ class OrdersScreen extends StatelessWidget {
         ),
       ),
 
-      body: ListView.builder(
-        padding: const EdgeInsets.all(16),
-        itemCount: 5, // mock orders
-        itemBuilder: (context, index) {
-          return const OrderCard();
+      body: ValueListenableBuilder<List>(
+        valueListenable: orderNotifier,
+        builder: (context, value, _) {
+          final orders = value;
+          if (orders.isEmpty) {
+            return const Center(child: Text('No orders yet'));
+          }
+
+          return ListView.builder(
+            padding: const EdgeInsets.all(16),
+            itemCount: orders.length,
+            itemBuilder: (context, index) {
+              return OrderCard(order: orders[index]);
+            },
+          );
         },
       ),
     );

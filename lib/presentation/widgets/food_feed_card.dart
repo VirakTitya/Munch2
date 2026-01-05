@@ -76,7 +76,10 @@ class FoodFeedCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20),
                       ),
                     ),
-                    child: const Text('Add'),
+                    child: const Text(
+                      'Add',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                 ],
               ),

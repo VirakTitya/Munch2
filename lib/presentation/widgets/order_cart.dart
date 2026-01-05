@@ -1,10 +1,22 @@
 import 'package:flutter/material.dart';
 
+import '../../domain/entities/order.dart';
+
 class OrderCard extends StatelessWidget {
-  const OrderCard({super.key});
+  final Order? order;
+
+  const OrderCard({super.key, this.order});
 
   @override
   Widget build(BuildContext context) {
+    
+    // AI generated placeholder data
+    final displayId = order?.id ?? 'Order #12345';
+    final status = order?.status.toString().split('.').last ?? 'delivered';
+    final items = order?.items.length ?? 3;
+    final date = DateTime.now();
+    final total = order?.totalPrice ?? 24.5;
+
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(16),
@@ -26,17 +38,17 @@ class OrderCard extends StatelessWidget {
           // Order ID + Status
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
+            children: [
               Text(
-                'Order #12345',
-                style: TextStyle(
+                displayId,
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Text(
-                'Delivered',
+                status,
                 style: TextStyle(
-                  color: Colors.green,
+                  color: status == 'delivered' ? Colors.green : Colors.orange,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -45,23 +57,23 @@ class OrderCard extends StatelessWidget {
 
           const SizedBox(height: 8),
 
-          const Text(
-            '3 items',
-            style: TextStyle(color: Colors.grey),
+          Text(
+            '$items items',
+            style: const TextStyle(color: Colors.grey),
           ),
 
           const SizedBox(height: 8),
 
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
+            children: [
               Text(
-                'Jan 4, 2026',
-                style: TextStyle(color: Colors.grey),
+                '${date.month}/${date.day}/${date.year}',
+                style: const TextStyle(color: Colors.grey),
               ),
               Text(
-                '\$24.50',
-                style: TextStyle(
+                '\$${total.toStringAsFixed(2)}',
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
                 ),
