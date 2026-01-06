@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:munch2/presentation/mock/mock_restaurant.dart';
 import '../../widgets/restaurant_card.dart';
+import '../restaurant/restaurant_detail_screen.dart';
 
 
 class SearchScreen extends StatefulWidget {
@@ -43,7 +44,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   setState(() => searchText = value);
                 },
                 decoration: InputDecoration(
-                  hintText: 'Search for restaurants or dishes...',
+                  hintText: 'Search for restaurants ...',
                   prefixIcon: const Icon(Icons.search),
                   filled: true,
                   fillColor: Colors.orange.shade50,
@@ -58,36 +59,43 @@ class _SearchScreenState extends State<SearchScreen> {
             const SizedBox(height: 12),
 
             // Categories
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
-                children: ['Trending', 'Burger', 'Pizza']
-                    .map((category) => Padding(
-                          padding: const EdgeInsets.only(right: 8),
-                          child: ChoiceChip(
-                            label: Text(category),
-                            selected: selectedCategory == category,
-                            onSelected: (_) {
-                              setState(() => selectedCategory = category);
-                            },
-                            selectedColor: Colors.orange,
-                          ),
-                        ))
-                    .toList(),
-              ),
-            ),
+            // SingleChildScrollView(
+            //   scrollDirection: Axis.horizontal,
+            //   padding: const EdgeInsets.symmetric(horizontal: 16),
+            //   child: Row(
+            //     children: ['Trending', 'Burger', 'Pizza']
+            //         .map((category) => Padding(
+            //               padding: const EdgeInsets.only(right: 8),
+            //               child: ChoiceChip(
+            //                 label: Text(category),
+            //                 selected: selectedCategory == category,
+            //                 onSelected: (_) {
+            //                   setState(() => selectedCategory = category);
+            //                 },
+            //                 selectedColor: Colors.orange,
+            //               ),
+            //             ))
+            //         .toList(),
+            //   ),
+            // ),
 
             const SizedBox(height: 16),
 
             // Restaurant list
             Expanded(
               child: ListView(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                children: filteredRestaurants
-                    .map((r) => RestaurantCard(restaurant: r))
-                    .toList(),
-              ),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  children: filteredRestaurants
+                      .map((r) => RestaurantCard(
+                            restaurant: r,
+                            onTap: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) => RestaurantDetailScreen(restaurant: r),
+                              ),
+                            ),
+                          ))
+                      .toList(),
+                ),
             ),
           ],
         ),
