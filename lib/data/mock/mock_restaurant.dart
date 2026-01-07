@@ -5,7 +5,7 @@ final mockRestaurants = [
   Restaurant(
     id: '1',
     name: 'Burger Master',
-    logoUrl: 'https://picsum.photos/400/200',
+    logoUrl: 'https://platform.seattle.eater.com/wp-content/uploads/sites/27/chorus/uploads/chorus_asset/file/25835864/IMG_7523.JPG?quality=90&strip=all&crop=12.5,0,75,100',
     location: 'Khan Toul Kork',
     deliveryTime: '20-30min',
     rating: 4.5,
@@ -13,7 +13,7 @@ final mockRestaurants = [
   Restaurant(
     id: '2',
     name: 'Pizza House',
-    logoUrl: 'https://picsum.photos/401/200',
+    logoUrl: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/23/70/fe/3e/every-day-more-than-hundred.jpg?w=900&h=-1&s=1',
     location: 'Daun Penh',
     deliveryTime: '30-40min',
     rating: 4.0,
@@ -21,7 +21,7 @@ final mockRestaurants = [
   Restaurant(
     id: '3',
     name: 'Sushi Express',
-    logoUrl: 'https://picsum.photos/402/200',
+    logoUrl: 'https://cdn.tracxn.com/images/seo/social/companies/umi-sushi-express-overview-1712979935706.webp',
     location: 'Toul Kork',
     deliveryTime: '15-25min',
     rating: 4.6,
@@ -29,7 +29,7 @@ final mockRestaurants = [
   Restaurant(
     id: '4',
     name: 'Taco Town',
-    logoUrl: 'https://picsum.photos/403/200',
+    logoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0s3YBCgn4LpfV6Jn1VdwBgh2hz63IaKhTow&s',
     location: 'Russian Market',
     deliveryTime: '25-35min',
     rating: 4.3,
@@ -37,7 +37,7 @@ final mockRestaurants = [
   Restaurant(
     id: '5',
     name: 'Green Bowl',
-    logoUrl: 'https://picsum.photos/404/200',
+    logoUrl: 'https://kaieteurnewsonline.com/wp-content/uploads/2022/08/Green-Bowl.jpg',
     location: 'BKK',
     deliveryTime: '20-30min',
     rating: 4.4,
