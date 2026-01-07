@@ -1,8 +1,7 @@
 import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
+import 'package:munch2/model/order.dart';
 
-import '../../data/entities/order.dart';
 
 class OrderCard extends StatelessWidget {
   final Order? order;

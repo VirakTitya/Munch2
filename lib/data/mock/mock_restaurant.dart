@@ -1,4 +1,4 @@
-import 'package:munch2/data/entities/restaurant.dart';
+import 'package:munch2/model/restaurant.dart';
 
 
 final mockRestaurants = [

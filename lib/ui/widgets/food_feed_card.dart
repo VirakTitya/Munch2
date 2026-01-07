@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../data/entities/food_item.dart';
+import 'package:munch2/model/food_item.dart';
+
 
 class FoodFeedCard extends StatelessWidget {
   final FoodItem food;

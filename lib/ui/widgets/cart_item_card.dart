@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
-
-import '../../data/entities/cart_item.dart';
-import '../state/cart_notifier.dart';
+import 'package:munch2/model/cart.dart';
+import 'package:munch2/model/cart_item.dart';
 
 class CartItemCard extends StatelessWidget {
   final CartItem cartItem;
+  final Function(Cart) onCartUpdated; // Callback to notify parent about cart updates
+  final Cart cart; // Pass the current cart to allow updates
 
-  const CartItemCard({super.key, required this.cartItem});
+  const CartItemCard({
+    super.key,
+    required this.cartItem,
+    required this.onCartUpdated,
+    required this.cart,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +32,7 @@ class CartItemCard extends StatelessWidget {
       ),
       child: Row(
         children: [
+          // Item image
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: SizedBox(
@@ -43,6 +50,7 @@ class CartItemCard extends StatelessWidget {
           ),
           const SizedBox(width: 12),
 
+          // Item details
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,12 +70,16 @@ class CartItemCard extends StatelessWidget {
             ),
           ),
 
-          // quantity controls
+          // Quantity controls
           Row(
             children: [
               IconButton(
                 icon: const Icon(Icons.remove_circle_outline),
-                onPressed: () => cartNotifier.decrement(cartItem.item.id),
+                onPressed: () {
+                  // Decrement the item quantity
+                  final updatedCart = cart.decrement(cartItem.item.id);
+                  onCartUpdated(updatedCart); // Notify parent about the updated cart
+                },
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 4.0),
@@ -75,7 +87,11 @@ class CartItemCard extends StatelessWidget {
               ),
               IconButton(
                 icon: const Icon(Icons.add_circle_outline),
-                onPressed: () => cartNotifier.increment(cartItem.item.id),
+                onPressed: () {
+                  // Increment the item quantity
+                  final updatedCart = cart.increment(cartItem.item.id);
+                  onCartUpdated(updatedCart); // Notify parent about the updated cart
+                },
               ),
             ],
           ),

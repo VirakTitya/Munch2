@@ -14,3 +14,19 @@ class Order {
     required this.status,
   });
 }
+
+class OrderManager {
+  final List<Order> _orders = [];
+
+  List<Order> get orders => List.unmodifiable(_orders); // Expose orders as an unmodifiable list
+
+  void addOrder(Order order) {
+    _orders.insert(0, order); // Add the new order to the beginning of the list
+  }
+
+  void clear() {
+    _orders.clear(); // Clear all orders
+  }
+}
+
+final orderManager = OrderManager();

@@ -1,4 +1,4 @@
-import '../entities/food_item.dart';
+import 'package:munch2/model/food_item.dart';
 import 'mock_restaurant.dart';
 
 final mockFoods = <FoodItem>[

@@ -3,7 +3,6 @@ import 'package:munch2/data/mock/mock_restaurant.dart';
 import '../../widgets/restaurant_card.dart';
 import '../restaurant/restaurant_detail_screen.dart';
 
-
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
 
@@ -17,6 +16,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Filter restaurants based on the search text
     final filteredRestaurants = mockRestaurants.where((r) {
       return r.name.toLowerCase().contains(searchText.toLowerCase());
     }).toList();
@@ -36,66 +36,46 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
             ),
 
-            // Search bar
+            // Search Bar
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: TextField(
-                onChanged: (value) {
-                  setState(() => searchText = value);
-                },
                 decoration: InputDecoration(
-                  hintText: 'Search for restaurants ...',
+                  hintText: 'Search for restaurants...',
                   prefixIcon: const Icon(Icons.search),
-                  filled: true,
-                  fillColor: Colors.orange.shade50,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide.none,
                   ),
                 ),
+                onChanged: (value) {
+                  setState(() {
+                    searchText = value;
+                  });
+                },
               ),
             ),
 
-            const SizedBox(height: 12),
-
-            // Categories
-            // SingleChildScrollView(
-            //   scrollDirection: Axis.horizontal,
-            //   padding: const EdgeInsets.symmetric(horizontal: 16),
-            //   child: Row(
-            //     children: ['Trending', 'Burger', 'Pizza']
-            //         .map((category) => Padding(
-            //               padding: const EdgeInsets.only(right: 8),
-            //               child: ChoiceChip(
-            //                 label: Text(category),
-            //                 selected: selectedCategory == category,
-            //                 onSelected: (_) {
-            //                   setState(() => selectedCategory = category);
-            //                 },
-            //                 selectedColor: Colors.orange,
-            //               ),
-            //             ))
-            //         .toList(),
-            //   ),
-            // ),
-
             const SizedBox(height: 16),
 
-            // Restaurant list
+            // Restaurant List
             Expanded(
-              child: ListView(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  children: filteredRestaurants
-                      .map((r) => RestaurantCard(
-                            restaurant: r,
-                            onTap: () => Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (_) => RestaurantDetailScreen(restaurant: r),
-                              ),
-                            ),
-                          ))
-                      .toList(),
-                ),
+              child: ListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                itemCount: filteredRestaurants.length,
+                itemBuilder: (context, index) {
+                  final restaurant = filteredRestaurants[index];
+                  return RestaurantCard(
+                    restaurant: restaurant,
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => RestaurantDetailScreen(restaurant: restaurant),
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
             ),
           ],
         ),

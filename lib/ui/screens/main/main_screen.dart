@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:munch2/model/cart.dart';
 import 'package:munch2/ui/screens/order/order_screen.dart';
+
 
 // screens
 import '../home/home_screen.dart';
@@ -15,20 +17,21 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
-
-  final List<Widget> _screens = const [
-    HomeScreen(),
-    SearchScreen(),
-    CartScreen(),
-    OrdersScreen(),
-  ];
+  final Cart cart = Cart.empty(); // Initialize an empty cart
 
   @override
   Widget build(BuildContext context) {
+    final List<Widget> screens = [
+      HomeScreen(cart: cart), // Pass the cart to HomeScreen
+      const SearchScreen(),
+      CartScreen(cart: cart), // Pass the cart to CartScreen
+      const OrdersScreen(),
+    ];
+
     return Scaffold(
       body: IndexedStack(
         index: _currentIndex,
-        children: _screens,
+        children: screens,
       ),
 
       bottomNavigationBar: BottomNavigationBar(

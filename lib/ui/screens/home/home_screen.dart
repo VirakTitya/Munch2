@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
-// import 'package:munch2/domain/usecases/add_item_to_cart.dart';
+import 'package:munch2/model/cart.dart';
+import 'package:munch2/model/cart_item.dart';
+import 'package:munch2/data/mock/mock_food.dart';
 import '../../widgets/food_feed_card.dart';
-import '../../../data/mock/mock_food.dart';
-import '../../state/cart_notifier.dart';
-import '../../../data/entities/cart_item.dart';
 import '../cart/cart_screen.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key, required Cart cart});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  Cart cart = Cart.empty(); // Initialize an empty cart
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +28,7 @@ class HomeScreen extends StatelessWidget {
           return FoodFeedCard(
             food: food,
             onAddToCart: () async {
-              final existing = cartNotifier.value.items;
+              final existing = cart.items;
               final conflict = existing.isNotEmpty && existing.first.item.restaurant.id != food.restaurant.id;
 
               if (conflict) {
@@ -42,11 +48,16 @@ class HomeScreen extends StatelessWidget {
 
                 if (!confirmed) return;
 
-                cartNotifier.clear();
+                setState(() {
+                  cart = cart.clear(); // Clear the cart
+                });
               }
 
               try {
-                cartNotifier.addItem(CartItem(item: food, quantity: 1));
+                setState(() {
+                  cart = cart.addItem(CartItem(item: food, quantity: 1)); // Add item to the cart
+                });
+
                 final snack = SnackBar(
                   content: const Text('Item added to cart'),
                   behavior: SnackBarBehavior.floating,
@@ -60,7 +71,9 @@ class HomeScreen extends StatelessWidget {
                     textColor: Colors.green,
                     onPressed: () {
                       Navigator.of(context).push(
-                        MaterialPageRoute(builder: (_) => const CartScreen()),
+                        MaterialPageRoute(
+                          builder: (_) => CartScreen(cart: cart), // Pass the cart to the CartScreen
+                        ),
                       );
                     },
                   ),

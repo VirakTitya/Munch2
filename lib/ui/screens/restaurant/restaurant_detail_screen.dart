@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
-import '../../../data/mock/mock_food.dart';
-import '../../../data/entities/restaurant.dart';
-import '../../state/cart_notifier.dart';
-import '../../../data/entities/cart_item.dart';
+import 'package:munch2/model/cart.dart';
+import 'package:munch2/model/cart_item.dart';
+import 'package:munch2/model/restaurant.dart';
+import 'package:munch2/data/mock/mock_food.dart';
 
-class RestaurantDetailScreen extends StatelessWidget {
+
+class RestaurantDetailScreen extends StatefulWidget {
   final Restaurant restaurant;
 
   const RestaurantDetailScreen({super.key, required this.restaurant});
 
   @override
+  State<RestaurantDetailScreen> createState() => _RestaurantDetailScreenState();
+}
+
+class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
+  Cart cart = Cart.empty(); // Initialize an empty cart
+
+  @override
   Widget build(BuildContext context) {
-    final foods = mockFoods.where((f) => f.restaurant.id == restaurant.id).toList();
+    final foods = mockFoods.where((f) => f.restaurant.id == widget.restaurant.id).toList();
 
     return Scaffold(
       body: Column(
@@ -22,7 +30,7 @@ class RestaurantDetailScreen extends StatelessWidget {
                 height: 240,
                 width: double.infinity,
                 child: Image.network(
-                  restaurant.logoUrl,
+                  widget.restaurant.logoUrl,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -44,7 +52,7 @@ class RestaurantDetailScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      restaurant.name,
+                      widget.restaurant.name,
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 28,
@@ -57,12 +65,12 @@ class RestaurantDetailScreen extends StatelessWidget {
                         const Icon(Icons.star, color: Colors.yellow, size: 18),
                         const SizedBox(width: 6),
                         Text(
-                          '${restaurant.rating} (1000+)',
+                          '${widget.restaurant.rating} (1000+)',
                           style: const TextStyle(color: Colors.white),
                         ),
                         const SizedBox(width: 16),
                         Text(
-                          restaurant.deliveryTime ?? '',
+                          widget.restaurant.deliveryTime ?? '',
                           style: const TextStyle(color: Colors.white),
                         ),
                       ],
@@ -122,7 +130,7 @@ class RestaurantDetailScreen extends StatelessWidget {
                                 padding: EdgeInsets.zero,
                                 icon: const Icon(Icons.add, color: Colors.white),
                                 onPressed: () async {
-                                  final existing = cartNotifier.value.items;
+                                  final existing = cart.items;
                                   final conflict = existing.isNotEmpty && existing.first.item.restaurant.id != food.restaurant.id;
 
                                   if (conflict) {
@@ -142,11 +150,15 @@ class RestaurantDetailScreen extends StatelessWidget {
 
                                     if (!confirmed) return;
 
-                                    cartNotifier.clear();
+                                    setState(() {
+                                      cart = cart.clear();
+                                    });
                                   }
 
                                   try {
-                                    cartNotifier.addItem(CartItem(item: food, quantity: 1));
+                                    setState(() {
+                                      cart = cart.addItem(CartItem(item: food, quantity: 1));
+                                    });
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(content: Text('Item added to cart')),
                                     );
