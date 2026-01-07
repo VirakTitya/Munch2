@@ -1,0 +1,148 @@
+import '../entities/food_item.dart';
+import 'mock_restaurant.dart';
+
+final mockFoods = <FoodItem>[
+  // 10 items for first restaurant (mockRestaurants[0])
+  FoodItem(
+    id: 'b1',
+    name: 'Classic Burger',
+    price: 6.99,
+    imageUrl: 'https://picsum.photos/seed/b1/200/200',
+    restaurant: mockRestaurants[0],
+  ),
+  FoodItem(
+    id: 'b2',
+    name: 'Cheese Burger',
+    price: 7.49,
+    imageUrl: 'https://picsum.photos/seed/b2/200/200',
+    restaurant: mockRestaurants[0],
+  ),
+  FoodItem(
+    id: 'b3',
+    name: 'Double Patty',
+    price: 9.99,
+    imageUrl: 'https://picsum.photos/seed/b3/200/200',
+    restaurant: mockRestaurants[0],
+  ),
+  FoodItem(
+    id: 'b4',
+    name: 'Bacon Burger',
+    price: 8.49,
+    imageUrl: 'https://picsum.photos/seed/b4/200/200',
+    restaurant: mockRestaurants[0],
+  ),
+  FoodItem(
+    id: 'b5',
+    name: 'Mushroom Swiss',
+    price: 8.99,
+    imageUrl: 'https://picsum.photos/seed/b5/200/200',
+    restaurant: mockRestaurants[0],
+  ),
+  FoodItem(
+    id: 'b6',
+    name: 'Spicy Burger',
+    price: 7.99,
+    imageUrl: 'https://picsum.photos/seed/b6/200/200',
+    restaurant: mockRestaurants[0],
+  ),
+  FoodItem(
+    id: 'b7',
+    name: 'Chicken Burger',
+    price: 6.79,
+    imageUrl: 'https://picsum.photos/seed/b7/200/200',
+    restaurant: mockRestaurants[0],
+  ),
+  FoodItem(
+    id: 'b8',
+    name: 'BBQ Burger',
+    price: 8.25,
+    imageUrl: 'https://picsum.photos/seed/b8/200/200',
+    restaurant: mockRestaurants[0],
+  ),
+  FoodItem(
+    id: 'b9',
+    name: 'Veggie Burger',
+    price: 6.49,
+    imageUrl: 'https://picsum.photos/seed/b9/200/200',
+    restaurant: mockRestaurants[0],
+  ),
+  FoodItem(
+    id: 'b10',
+    name: 'Deluxe Burger',
+    price: 10.99,
+    imageUrl: 'https://picsum.photos/seed/b10/200/200',
+    restaurant: mockRestaurants[0],
+  ),
+
+  // 10 items for second restaurant (mockRestaurants[1])
+  FoodItem(
+    id: 'p1',
+    name: 'Margherita Pizza',
+    price: 7.99,
+    imageUrl: 'https://picsum.photos/seed/p1/200/200',
+    restaurant: mockRestaurants[1],
+  ),
+  FoodItem(
+    id: 'p2',
+    name: 'Pepperoni Pizza',
+    price: 8.99,
+    imageUrl: 'https://picsum.photos/seed/p2/200/200',
+    restaurant: mockRestaurants[1],
+  ),
+  FoodItem(
+    id: 'p3',
+    name: 'Hawaiian Pizza',
+    price: 9.49,
+    imageUrl: 'https://picsum.photos/seed/p3/200/200',
+    restaurant: mockRestaurants[1],
+  ),
+  FoodItem(
+    id: 'p4',
+    name: 'BBQ Chicken Pizza',
+    price: 10.25,
+    imageUrl: 'https://picsum.photos/seed/p4/200/200',
+    restaurant: mockRestaurants[1],
+  ),
+  FoodItem(
+    id: 'p5',
+    name: 'Veggie Pizza',
+    price: 8.25,
+    imageUrl: 'https://picsum.photos/seed/p5/200/200',
+    restaurant: mockRestaurants[1],
+  ),
+  FoodItem(
+    id: 'p6',
+    name: 'Four Cheese',
+    price: 9.75,
+    imageUrl: 'https://picsum.photos/seed/p6/200/200',
+    restaurant: mockRestaurants[1],
+  ),
+  FoodItem(
+    id: 'p7',
+    name: 'Meat Lovers',
+    price: 11.99,
+    imageUrl: 'https://picsum.photos/seed/p7/200/200',
+    restaurant: mockRestaurants[1],
+  ),
+  FoodItem(
+    id: 'p8',
+    name: 'Seafood Pizza',
+    price: 12.50,
+    imageUrl: 'https://picsum.photos/seed/p8/200/200',
+    restaurant: mockRestaurants[1],
+  ),
+  FoodItem(
+    id: 'p9',
+    name: 'Pesto Chicken',
+    price: 10.00,
+    imageUrl: 'https://picsum.photos/seed/p9/200/200',
+    restaurant: mockRestaurants[1],
+  ),
+  FoodItem(
+    id: 'p10',
+    name: 'Garlic Bread',
+    price: 3.99,
+    imageUrl: 'https://picsum.photos/seed/p10/200/200',
+    restaurant: mockRestaurants[1],
+  ),
+];
