@@ -7,8 +7,9 @@ import 'package:munch2/model/enum/order_status.dart';
 class CartScreen extends StatefulWidget {
   final Cart cart;
   final ValueChanged<Cart>? onCartUpdated;
+  final VoidCallback? onGoToOrders;
 
-  const CartScreen({super.key, required this.cart, this.onCartUpdated});
+  const CartScreen({super.key, required this.cart, this.onCartUpdated, this.onGoToOrders});
 
   @override
   State<CartScreen> createState() => _CartScreenState();
@@ -76,7 +77,6 @@ class _CartScreenState extends State<CartScreen> {
                   ),
           ),
 
-          // 💵 Address, Summary + Checkout
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
@@ -92,7 +92,6 @@ class _CartScreenState extends State<CartScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Delivery address card
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
@@ -131,7 +130,6 @@ class _CartScreenState extends State<CartScreen> {
 
                 const SizedBox(height: 12),
 
-                // Totals
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -184,10 +182,11 @@ class _CartScreenState extends State<CartScreen> {
                       );
                       orderManager.addOrder(order);
 
-                      setState(() {
-                        cart = cart.clear(); // Clear the cart
-                      });
-                      widget.onCartUpdated?.call(cart);
+                      // If this CartScreen was pushed, pop it so the main scaffold is visible
+                      if (Navigator.canPop(context)) Navigator.of(context).pop();
+
+                      widget.onCartUpdated?.call(cart.clear());
+                      widget.onGoToOrders?.call();
 
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Order placed')));
                     },

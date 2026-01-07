@@ -8,8 +8,9 @@ import '../cart/cart_screen.dart';
 class HomeScreen extends StatefulWidget {
   final Cart cart;
   final ValueChanged<Cart>? onCartUpdated;
+  final VoidCallback? onGoToOrders;
 
-  const HomeScreen({super.key, required this.cart, this.onCartUpdated});
+  const HomeScreen({super.key, required this.cart, this.onCartUpdated, this.onGoToOrders});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -93,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     onPressed: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (_) => CartScreen(cart: cart, onCartUpdated: widget.onCartUpdated), // Pass the cart and callback to the CartScreen
+                          builder: (_) => CartScreen(cart: cart, onCartUpdated: widget.onCartUpdated, onGoToOrders: widget.onGoToOrders), // Pass the cart, callbacks to the CartScreen
                         ),
                       );
                     },

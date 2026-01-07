@@ -25,9 +25,10 @@ class _MainScreenState extends State<MainScreen> {
       HomeScreen(
         cart: cart,
         onCartUpdated: (updated) => setState(() => cart = updated),
+        onGoToOrders: () => setState(() => _currentIndex = 3),
       ),
       SearchScreen(cart: cart, onCartUpdated: (updated) => setState(() => cart = updated)),
-      CartScreen(cart: cart, onCartUpdated: (updated) => setState(() => cart = updated)), // Pass the cart to CartScreen
+      CartScreen(cart: cart, onCartUpdated: (updated) => setState(() => cart = updated), onGoToOrders: () => setState(() => _currentIndex = 3)), // Pass the cart to CartScreen
       const OrdersScreen(),
     ];
 

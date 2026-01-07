@@ -30,7 +30,7 @@ class FoodFeedCard extends StatelessWidget {
               begin: Alignment.bottomCenter,
               end: Alignment.topCenter,
               colors: [
-                Colors.black87,
+                Colors.black12,
                 Colors.transparent,
               ],
             ),
