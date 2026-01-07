@@ -1,0 +1,148 @@
+import 'package:munch2/model/food_item.dart';
+import 'mock_restaurant.dart';
+
+final mockFoods = <FoodItem>[
+  // 10 items for first restaurant (mockRestaurants[0])
+  FoodItem(
+    id: 'b1',
+    name: 'Classic Burger',
+    price: 6.99,
+    imageUrl: 'https://thumbs.dreamstime.com/b/home-made-tasty-burger-meat-cutlet-cheese-wooden-vintage-table-vertical-image-copy-space-133427623.jpg',
+    restaurant: mockRestaurants[0],
+  ),
+  FoodItem(
+    id: 'b2',
+    name: 'Cheese Burger',
+    price: 7.49,
+    imageUrl: 'https://thumbs.dreamstime.com/b/vertical-image-appetizing-multilayer-hamburger-dark-background-vertical-image-appetizing-multilayer-hamburger-278445226.jpg',
+    restaurant: mockRestaurants[0],
+  ),
+  FoodItem(
+    id: 'b3',
+    name: 'Double Patty',
+    price: 9.99,
+    imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdScs6nhFRS8SvUoqQM4dF2LRGKHU9W5vXog&s',
+    restaurant: mockRestaurants[0],
+  ),
+  FoodItem(
+    id: 'b4',
+    name: 'Bacon Burger',
+    price: 8.49,
+    imageUrl: 'https://thumbs.dreamstime.com/b/spicy-beef-burger-bacon-melted-cheddar-hot-glossy-food-vertical-ad-copy-zone-426133677.jpg',
+    restaurant: mockRestaurants[0],
+  ),
+  FoodItem(
+    id: 'b5',
+    name: 'Mushroom Swiss',
+    price: 8.99,
+    imageUrl: 'https://media.istockphoto.com/id/840592542/photo/cheeseburger-on-cutting-board.jpg?s=612x612&w=0&k=20&c=cROk9f72A6y_PZoG5QXcHIea2iCBt54UeXCudYJrVCU=',
+    restaurant: mockRestaurants[0],
+  ),
+  FoodItem(
+    id: 'b6',
+    name: 'Spicy Burger',
+    price: 7.99,
+    imageUrl: 'https://thumbs.dreamstime.com/b/spicy-beef-burger-bacon-melted-cheddar-hot-glossy-food-vertical-ad-copy-zone-426173823.jpg',
+    restaurant: mockRestaurants[0],
+  ),
+  FoodItem(
+    id: 'b7',
+    name: 'Chicken Burger',
+    price: 6.79,
+    imageUrl: 'https://thumbs.dreamstime.com/b/homemade-triple-decker-burger-knife-fries-dark-wooden-background-vertical-105757851.jpg',
+    restaurant: mockRestaurants[0],
+  ),
+  FoodItem(
+    id: 'b8',
+    name: 'BBQ Burger',
+    price: 8.25,
+    imageUrl: 'https://thumbs.dreamstime.com/b/big-tasty-burger-double-beef-close-up-vertical-167003711.jpg',
+    restaurant: mockRestaurants[0],
+  ),
+  FoodItem(
+    id: 'b9',
+    name: 'Veggie Burger',
+    price: 6.49,
+    imageUrl: 'https://thumbs.dreamstime.com/b/veggie-burger-rusty-baking-stick-wooden-background-copyspace-vertical-orientation-close-up-lettuce-cutlet-vegetarian-meat-176027330.jpg',
+    restaurant: mockRestaurants[0],
+  ),
+  FoodItem(
+    id: 'b10',
+    name: 'Deluxe Burger',
+    price: 10.99,
+    imageUrl: 'https://www.shutterstock.com/image-photo/homemade-deluxe-burger-cheese-lettuce-600nw-1872413779.jpg',
+    restaurant: mockRestaurants[0],
+  ),
+
+  // 10 items for second restaurant (mockRestaurants[1])
+  FoodItem(
+    id: 'p1',
+    name: 'Margherita Pizza',
+    price: 7.99,
+    imageUrl: 'https://media.istockphoto.com/id/451866291/photo/margherita-pizza.jpg?s=612x612&w=0&k=20&c=9GdIWikoDItvvOlT5djjTPOJHj1s9JFgomcFzA9uKBU=',
+    restaurant: mockRestaurants[1],
+  ),
+  FoodItem(
+    id: 'p2',
+    name: 'Pepperoni Pizza',
+    price: 8.99,
+    imageUrl: 'https://www.shutterstock.com/shutterstock/photos/225747550/display_1500/stock-photo-hot-homemade-pepperoni-pizza-ready-to-eat-225747550.jpg',
+    restaurant: mockRestaurants[1],
+  ),
+  FoodItem(
+    id: 'p3',
+    name: 'Hawaiian Pizza',
+    price: 9.49,
+    imageUrl: 'https://thumbs.dreamstime.com/b/tasty-pizza-salami-shrimp-mozzarella-arugula-vertica-wooden-table-vertical-macro-76325377.jpg',
+    restaurant: mockRestaurants[1],
+  ),
+  FoodItem(
+    id: 'p4',
+    name: 'BBQ Chicken Pizza',
+    price: 10.25,
+    imageUrl: 'https://fedandfit.com/wp-content/uploads/2022/02/230622_bbq-chicken-pizza-13-scaled.jpg',
+    restaurant: mockRestaurants[1],
+  ),
+  FoodItem(
+    id: 'p5',
+    name: 'Veggie Pizza',
+    price: 8.25,
+    imageUrl: 'https://www.wholesomelicious.com/wp-content/uploads/2017/10/Vegan-and-Paleo-Pesto-Veggie-Pizza-Vertical-Picture-683x1024.jpg',
+    restaurant: mockRestaurants[1],
+  ),
+  FoodItem(
+    id: 'p6',
+    name: 'Four Cheese',
+    price: 9.75,
+    imageUrl: 'https://cbx-prod.b-cdn.net/COLOURBOX58416048.jpg?width=800&height=800&quality=70',
+    restaurant: mockRestaurants[1],
+  ),
+  FoodItem(
+    id: 'p7',
+    name: 'Meat Lovers',
+    price: 11.99,
+    imageUrl: 'https://thumbs.dreamstime.com/b/classic-pizza-margarita-top-view-291878488.jpg',
+    restaurant: mockRestaurants[1],
+  ),
+  FoodItem(
+    id: 'p8',
+    name: 'Seafood Pizza',
+    price: 12.50,
+    imageUrl: 'https://thumbs.dreamstime.com/b/top-view-delicious-pizza-red-fish-mussels-octopus-seafood-dark-background-slice-cut-off-vertical-photo-287896631.jpg',
+    restaurant: mockRestaurants[1],
+  ),
+  FoodItem(
+    id: 'p9',
+    name: 'Pesto Chicken',
+    price: 10.00,
+    imageUrl: 'https://foxeslovelemons.com/wp-content/uploads/2024/07/Pesto-Pizza-Foxes-Love-Lemons.jpg',
+    restaurant: mockRestaurants[1],
+  ),
+  FoodItem(
+    id: 'p10',
+    name: 'Garlic Bread',
+    price: 3.99,
+    imageUrl: 'https://thumbs.dreamstime.com/b/cheesy-garlic-bread-pull-apart-whole-round-cutting-board-white-wood-table-melted-butter-tomatoes-spices-background-269583475.jpg',
+    restaurant: mockRestaurants[1],
+  ),
+];

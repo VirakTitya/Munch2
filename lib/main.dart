@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:munch2/presentation/screens/main/main_screen.dart';
+import 'package:munch2/ui/screens/main/main_screen.dart';
 
 void main() {
   runApp(const MyApp());
