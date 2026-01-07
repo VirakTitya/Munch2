@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'enum/order_status.dart';
 import 'cart_item.dart';
 
@@ -15,17 +16,19 @@ class Order {
   });
 }
 
-class OrderManager {
+class OrderManager extends ChangeNotifier {
   final List<Order> _orders = [];
 
   List<Order> get orders => List.unmodifiable(_orders); // Expose orders as an unmodifiable list
 
   void addOrder(Order order) {
     _orders.insert(0, order); // Add the new order to the beginning of the list
+    notifyListeners();
   }
 
   void clear() {
     _orders.clear(); // Clear all orders
+    notifyListeners();
   }
 }
 

@@ -6,14 +6,33 @@ import '../../widgets/food_feed_card.dart';
 import '../cart/cart_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key, required Cart cart});
+  final Cart cart;
+  final ValueChanged<Cart>? onCartUpdated;
+
+  const HomeScreen({super.key, required this.cart, this.onCartUpdated});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  Cart cart = Cart.empty(); // Initialize an empty cart
+  late Cart cart; // local copy to keep UI snappy; synced with widget.cart
+
+  @override
+  void initState() {
+    super.initState();
+    cart = widget.cart;
+  }
+
+  @override
+  void didUpdateWidget(covariant HomeScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.cart != oldWidget.cart) {
+      setState(() {
+        cart = widget.cart;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,12 +70,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 setState(() {
                   cart = cart.clear(); // Clear the cart
                 });
+                widget.onCartUpdated?.call(cart);
               }
 
               try {
                 setState(() {
                   cart = cart.addItem(CartItem(item: food, quantity: 1)); // Add item to the cart
                 });
+                widget.onCartUpdated?.call(cart);
 
                 final snack = SnackBar(
                   content: const Text('Item added to cart'),
@@ -72,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     onPressed: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (_) => CartScreen(cart: cart), // Pass the cart to the CartScreen
+                          builder: (_) => CartScreen(cart: cart, onCartUpdated: widget.onCartUpdated), // Pass the cart and callback to the CartScreen
                         ),
                       );
                     },

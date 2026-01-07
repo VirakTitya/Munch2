@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:munch2/data/mock/mock_restaurant.dart';
+import 'package:munch2/model/cart.dart';
 import '../../widgets/restaurant_card.dart';
 import '../restaurant/restaurant_detail_screen.dart';
 
 class SearchScreen extends StatefulWidget {
-  const SearchScreen({super.key});
+  final Cart cart;
+  final ValueChanged<Cart>? onCartUpdated;
+
+  const SearchScreen({super.key, required this.cart, this.onCartUpdated});
 
   @override
   State<SearchScreen> createState() => _SearchScreenState();
@@ -69,7 +73,11 @@ class _SearchScreenState extends State<SearchScreen> {
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (_) => RestaurantDetailScreen(restaurant: restaurant),
+                          builder: (_) => RestaurantDetailScreen(
+                                restaurant: restaurant,
+                                cart: widget.cart,
+                                onCartUpdated: widget.onCartUpdated,
+                              ),
                         ),
                       );
                     },

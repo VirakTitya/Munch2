@@ -7,15 +7,27 @@ import 'package:munch2/data/mock/mock_food.dart';
 
 class RestaurantDetailScreen extends StatefulWidget {
   final Restaurant restaurant;
+  final Cart cart;
+  final ValueChanged<Cart>? onCartUpdated;
 
-  const RestaurantDetailScreen({super.key, required this.restaurant});
+  const RestaurantDetailScreen({super.key, required this.restaurant, required this.cart, this.onCartUpdated});
 
   @override
   State<RestaurantDetailScreen> createState() => _RestaurantDetailScreenState();
 }
 
 class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
-  Cart cart = Cart.empty(); // Initialize an empty cart
+  late Cart cart = widget.cart; // use shared cart
+
+  @override
+  void didUpdateWidget(covariant RestaurantDetailScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.cart != oldWidget.cart) {
+      setState(() {
+        cart = widget.cart;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -153,12 +165,14 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                                     setState(() {
                                       cart = cart.clear();
                                     });
+                                    widget.onCartUpdated?.call(cart);
                                   }
 
                                   try {
                                     setState(() {
                                       cart = cart.addItem(CartItem(item: food, quantity: 1));
                                     });
+                                    widget.onCartUpdated?.call(cart);
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(content: Text('Item added to cart')),
                                     );

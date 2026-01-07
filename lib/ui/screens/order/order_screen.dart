@@ -2,10 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:munch2/model/order.dart';
 import 'package:munch2/ui/widgets/order_cart.dart';
 
-
-
-class OrdersScreen extends StatelessWidget {
+class OrdersScreen extends StatefulWidget {
   const OrdersScreen({super.key});
+
+  @override
+  State<OrdersScreen> createState() => _OrdersScreenState();
+}
+
+class _OrdersScreenState extends State<OrdersScreen> {
+  @override
+  void initState() {
+    super.initState();
+    orderManager.addListener(_onOrdersChanged);
+  }
+
+  @override
+  void dispose() {
+    orderManager.removeListener(_onOrdersChanged);
+    super.dispose();
+  }
+
+  void _onOrdersChanged() => setState(() {});
 
   @override
   Widget build(BuildContext context) {

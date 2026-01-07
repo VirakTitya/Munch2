@@ -17,14 +17,17 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
-  final Cart cart = Cart.empty(); // Initialize an empty cart
+  Cart cart = Cart.empty(); // Initialize an empty cart
 
   @override
   Widget build(BuildContext context) {
     final List<Widget> screens = [
-      HomeScreen(cart: cart), // Pass the cart to HomeScreen
-      const SearchScreen(),
-      CartScreen(cart: cart), // Pass the cart to CartScreen
+      HomeScreen(
+        cart: cart,
+        onCartUpdated: (updated) => setState(() => cart = updated),
+      ),
+      SearchScreen(cart: cart, onCartUpdated: (updated) => setState(() => cart = updated)),
+      CartScreen(cart: cart, onCartUpdated: (updated) => setState(() => cart = updated)), // Pass the cart to CartScreen
       const OrdersScreen(),
     ];
 
