@@ -1,4 +1,4 @@
-import 'package:munch2/model/restaurant.dart';
+import 'package:munch2/domain/model/restaurant.dart';
 
 
 final mockRestaurants = [
@@ -17,29 +17,5 @@ final mockRestaurants = [
     location: 'Daun Penh',
     deliveryTime: '30-40min',
     rating: 4.0,
-  ),
-  Restaurant(
-    id: '3',
-    name: 'Sushi Express',
-    logoUrl: 'https://cdn.tracxn.com/images/seo/social/companies/umi-sushi-express-overview-1712979935706.webp',
-    location: 'Toul Kork',
-    deliveryTime: '15-25min',
-    rating: 4.6,
-  ),
-  Restaurant(
-    id: '4',
-    name: 'Taco Town',
-    logoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0s3YBCgn4LpfV6Jn1VdwBgh2hz63IaKhTow&s',
-    location: 'Russian Market',
-    deliveryTime: '25-35min',
-    rating: 4.3,
-  ),
-  Restaurant(
-    id: '5',
-    name: 'Green Bowl',
-    logoUrl: 'https://kaieteurnewsonline.com/wp-content/uploads/2022/08/Green-Bowl.jpg',
-    location: 'BKK',
-    deliveryTime: '20-30min',
-    rating: 4.4,
   ),
 ];

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:munch2/model/order.dart';
-import 'package:munch2/ui/widgets/order_cart.dart';
+import 'package:munch2/domain/model/order.dart';
+import 'package:munch2/domain/service/order_service.dart';
+import 'package:munch2/ui/widgets/order_cart.dart'; // Make sure this widget can display an Order
 
 class OrdersScreen extends StatefulWidget {
-  const OrdersScreen({super.key});
+  final OrderService orderService;
+
+  const OrdersScreen({super.key, required this.orderService});
 
   @override
   State<OrdersScreen> createState() => _OrdersScreenState();
@@ -13,20 +16,11 @@ class _OrdersScreenState extends State<OrdersScreen> {
   @override
   void initState() {
     super.initState();
-    orderManager.addListener(_onOrdersChanged);
   }
-
-  @override
-  void dispose() {
-    orderManager.removeListener(_onOrdersChanged);
-    super.dispose();
-  }
-
-  void _onOrdersChanged() => setState(() {});
 
   @override
   Widget build(BuildContext context) {
-    final List<Order> orders = orderManager.orders;
+    final List<Order> orders = widget.orderService.orderHistory;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -48,7 +42,8 @@ class _OrdersScreenState extends State<OrdersScreen> {
               padding: const EdgeInsets.all(16),
               itemCount: orders.length,
               itemBuilder: (context, index) {
-                return OrderCard(order: orders[index]); // Pass non-nullable Order
+                final order = orders[index];
+                return OrderCard(order: order); // Pass Order directly
               },
             ),
     );

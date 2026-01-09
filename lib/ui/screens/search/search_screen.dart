@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:munch2/data/mock/mock_restaurant.dart';
-import 'package:munch2/model/cart.dart';
+import 'package:munch2/domain/model/cart.dart';
 import '../../widgets/restaurant_card.dart';
 import '../restaurant/restaurant_detail_screen.dart';
 
@@ -16,7 +16,6 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   String searchText = '';
-  String selectedCategory = 'Trending';
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +23,6 @@ class _SearchScreenState extends State<SearchScreen> {
     final filteredRestaurants = mockRestaurants.where((r) {
       return r.name.toLowerCase().contains(searchText.toLowerCase());
     }).toList();
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
