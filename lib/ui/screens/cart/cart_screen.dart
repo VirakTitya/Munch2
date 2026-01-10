@@ -3,7 +3,11 @@ import 'package:munch2/domain/model/cart.dart';
 import 'package:munch2/domain/service/order_service.dart';
 import 'package:munch2/ui/screens/order/order_screen.dart';
 import 'package:munch2/ui/screens/cart/app_string.dart';
+import 'package:munch2/ui/widgets/location_card.dart';
+import 'package:munch2/ui/widgets/location_sheet.dart';
 import '../../widgets/cart_item_card.dart';
+
+
 
 
 class CartScreen extends StatefulWidget {
@@ -29,6 +33,8 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
   late Cart cart;
   late OrderService orderService;
+
+  String deliveryLocation = 'Home • Toul Kork, Phnom Penh';
 
   @override
   void initState() {
@@ -114,6 +120,17 @@ class _CartScreenState extends State<CartScreen> {
             padding: const EdgeInsets.all(16),
             child: Column(
               children: [
+                LocationCard(
+                  address: deliveryLocation,
+                  onEdit: () async {
+                    final selected = await LocationPickerSheet.show(context);
+                    if (selected != null) {
+                      setState(() {
+                        deliveryLocation = selected;
+                      });
+                    }
+                  },
+                ),
                 _priceRow(AppStrings.subtotal, subtotal),
                 _priceRow(AppStrings.delivery, AppStrings.deliveryFee),
                 const Divider(),
@@ -122,8 +139,11 @@ class _CartScreenState extends State<CartScreen> {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: _checkout,
-                    child: const Text(AppStrings.checkout),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.deepOrangeAccent, // Set button color to orange
+                  ),
+                  onPressed: _checkout,
+                  child: const Text(AppStrings.checkout),
                   ),
                 ),
               ],
