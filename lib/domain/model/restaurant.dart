@@ -10,6 +10,7 @@ class Restaurant {
     required this.name,
     required this.logoUrl,
     required this.location,
-    required this.rating, required String deliveryTime,
+    required this.rating, 
+    required String deliveryTime,
   });
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:munch2/domain/model/order.dart';
 import 'package:munch2/domain/service/order_service.dart';
-import 'package:munch2/ui/widgets/order_cart.dart'; // Make sure this widget can display an Order
+import 'package:munch2/ui/widgets/order_cart.dart'; 
 
 class OrdersScreen extends StatefulWidget {
   final OrderService orderService;
@@ -20,7 +20,14 @@ class _OrdersScreenState extends State<OrdersScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final List<Order> orders = widget.orderService.orderHistory;
+
+    final combined = [...widget.orderService.orderHistory, ...orderManager.orders];
+
+    final Map<String, Order> byId = {};
+    for (var o in combined) {
+      byId[o.id] = o;
+    }
+    final List<Order> orders = byId.values.toList();
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -43,7 +50,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
               itemCount: orders.length,
               itemBuilder: (context, index) {
                 final order = orders[index];
-                return OrderCard(order: order); // Pass Order directly
+                return OrderCard(order: order); 
               },
             ),
     );

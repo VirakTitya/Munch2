@@ -46,7 +46,6 @@ class FoodFeedCard extends StatelessWidget {
             ),
           ),
         ),
-
         // Content
         Padding(
           padding: const EdgeInsets.all(16),

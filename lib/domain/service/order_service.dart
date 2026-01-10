@@ -36,18 +36,15 @@ class OrderService {
     }
   }
 
-  /// Clear all items in the cart
   void clearCart(Cart cart) {
     cart.items.clear();
   }
 
-  /// Checkout: create order from cart and clear cart
   Order checkout(Cart cart) {
     if (cart.items.isEmpty) {
       throw Exception("Cart is empty");
     }
 
-    // Make a snapshot for order
     final orderItems = cart.items
         .map((item) => CartItem(food: item.food, quantity: item.quantity))
         .toList();
@@ -61,9 +58,7 @@ class OrderService {
 
     orderHistory.add(order);
 
-    // Clear cart
     clearCart(cart);
-
     return order;
   }
 }

@@ -26,6 +26,7 @@ class _MainScreenState extends State<MainScreen> {
     final List<Widget> screens = [
       HomeScreen(
         cart: cart,
+        orderService: orderService,
         onCartUpdated: (updatedCart) => setState(() => cart = updatedCart),
         onGoToOrders: () => setState(() => _currentIndex = 3),
       ),
@@ -35,22 +36,11 @@ class _MainScreenState extends State<MainScreen> {
       ),
       CartScreen(
         cart: cart,
+        orderService: orderService,
         onCartUpdated: (updatedCart) => setState(() => cart = updatedCart),
         onGoToOrders: () => setState(() => _currentIndex = 3),
-        onCheckout: () {
-          if (cart.items.isEmpty) return;
-
-          final order = orderService.checkout(cart);
-          setState(() {
-            cart = Cart.empty(); // Cart is cleared after checkout
-          });
-
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Order ${order.id} placed! Total: \$${order.total.toStringAsFixed(2)}')),
-          );
-        },
       ),
-      OrdersScreen(orderService: orderService), // Pass service to OrdersScreen
+      OrdersScreen(orderService: orderService), 
     ];
 
     return Scaffold(

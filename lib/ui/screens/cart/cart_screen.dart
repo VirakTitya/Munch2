@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:munch2/domain/model/cart.dart';
-import 'package:munch2/domain/model/order.dart';
 import 'package:munch2/domain/service/order_service.dart';
+import 'package:munch2/ui/screens/order/order_screen.dart';
 import 'package:munch2/ui/screens/cart/app_string.dart';
 import '../../widgets/cart_item_card.dart';
 
@@ -10,12 +10,16 @@ class CartScreen extends StatefulWidget {
   final Cart cart;
   final ValueChanged<Cart>? onCartUpdated;
   final VoidCallback? onGoToOrders;
+  final VoidCallback? onCheckout;
+  final OrderService orderService;
 
   const CartScreen({
     super.key,
     required this.cart,
+    required this.orderService,
     this.onCartUpdated,
-    this.onGoToOrders, required Null Function() onCheckout,
+    this.onGoToOrders,
+    this.onCheckout,
   });
 
   @override
@@ -30,7 +34,7 @@ class _CartScreenState extends State<CartScreen> {
   void initState() {
     super.initState();
     cart = widget.cart;
-    orderService = OrderService(); // initialize service
+    orderService = widget.orderService;
   }
 
   @override
@@ -39,6 +43,34 @@ class _CartScreenState extends State<CartScreen> {
     if (widget.cart != oldWidget.cart) {
       cart = widget.cart;
     }
+  }
+
+  void _checkout() {
+    if (cart.items.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text(AppStrings.cartEmptySnack)),
+      );
+      return;
+    }
+
+      orderService.checkout(cart);
+
+      widget.onCartUpdated?.call(cart);
+
+      widget.onCheckout?.call();
+
+      if (widget.onGoToOrders != null) {
+        widget.onGoToOrders!.call();
+        if (Navigator.of(context).canPop()) Navigator.of(context).pop();
+      } else {
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (_) => OrdersScreen(orderService: orderService),
+        ));
+      }
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text(AppStrings.orderPlaced)),
+      );
   }
 
   @override
@@ -78,8 +110,6 @@ class _CartScreenState extends State<CartScreen> {
                     },
                   ),
           ),
-
-          // Checkout section
           Container(
             padding: const EdgeInsets.all(16),
             child: Column(
@@ -104,34 +134,6 @@ class _CartScreenState extends State<CartScreen> {
     );
   }
 
-  void _checkout() {
-  if (cart.items.isEmpty) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text(AppStrings.cartEmptySnack)),
-    );
-    return;
-  }
-
-  // Checkout: create order snapshot and clear cart
-  final order = orderService.checkout(cart);
-
-  // Notify parent: pass the cleared cart
-  widget.onCartUpdated?.call(cart);
-
-  // Optional: add to global order manager
-  orderManager.addOrder(order);
-
-  // Navigate to orders screen if callback exists
-  widget.onGoToOrders?.call();
-
-  // Show confirmation
-  ScaffoldMessenger.of(context).showSnackBar(
-    const SnackBar(content: Text(AppStrings.orderPlaced)),
-  );
-}
-
-
-  /// Price row helper
   Widget _priceRow(String label, double value, {bool bold = false}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,

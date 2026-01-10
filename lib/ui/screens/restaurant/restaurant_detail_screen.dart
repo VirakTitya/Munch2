@@ -40,7 +40,7 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
   }
 
   Future<void> _addToCart(FoodItem food) async {
-    // Restaurant conflict check
+
     if (cart.items.isNotEmpty &&
         cart.items.first.food.restaurant.id != food.restaurant.id) {
       final otherName = cart.items.first.food.restaurant.name;
@@ -71,7 +71,6 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
       widget.onCartUpdated?.call(cart);
     }
 
-    // Add or increase item
     setState(() {
       final existing = cart.items.firstWhere(
         (item) => item.food.id == food.id,

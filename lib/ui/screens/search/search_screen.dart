@@ -19,7 +19,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Filter restaurants based on the search text
+
     final filteredRestaurants = mockRestaurants.where((r) {
       return r.name.toLowerCase().contains(searchText.toLowerCase());
     }).toList();
@@ -29,7 +29,6 @@ class _SearchScreenState extends State<SearchScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Title
             const Padding(
               padding: EdgeInsets.all(16),
               child: Text(
@@ -38,7 +37,6 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
             ),
 
-            // Search Bar
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: TextField(
@@ -59,7 +57,6 @@ class _SearchScreenState extends State<SearchScreen> {
 
             const SizedBox(height: 16),
 
-            // Restaurant List
             Expanded(
               child: ListView.builder(
                 padding: const EdgeInsets.symmetric(horizontal: 16),

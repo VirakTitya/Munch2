@@ -37,9 +37,7 @@ class OrderCard extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-
           const SizedBox(height: 12),
-
           // Food images (max 3)
           Row(
             children: order.items.take(3).map((cartItem) {

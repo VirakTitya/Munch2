@@ -4,16 +4,19 @@ import 'package:munch2/domain/model/cart_item.dart';
 import 'package:munch2/domain/model/food_item.dart';
 import 'package:munch2/ui/widgets/food_feed_card.dart';
 import 'package:munch2/ui/screens/cart/cart_screen.dart';
+import 'package:munch2/domain/service/order_service.dart';
 import 'package:munch2/data/mock/mock_food.dart';
 
 class HomeScreen extends StatefulWidget {
   final Cart cart;
+  final OrderService orderService;
   final ValueChanged<Cart>? onCartUpdated;
   final VoidCallback? onGoToOrders;
 
   const HomeScreen({
     super.key,
     required this.cart,
+    required this.orderService,
     this.onCartUpdated,
     this.onGoToOrders,
   });
@@ -105,9 +108,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 MaterialPageRoute(
                   builder: (_) => CartScreen(
                     cart: cart,
+                    orderService: widget.orderService,
                     onCartUpdated: widget.onCartUpdated,
-                    onGoToOrders: widget.onGoToOrders, 
-                    onCheckout: () {  },
+                    onGoToOrders: widget.onGoToOrders,
+                    onCheckout: () {},
                   ),
                 ),
               );
@@ -126,8 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
         itemCount: mockFoods.length,
         itemBuilder: (context, index) {
           final food = mockFoods[index];
-
-          return FoodFeedCard(
+                    return FoodFeedCard(
             food: food,
             onAddToCart: () => _addToCart(food),
           );
