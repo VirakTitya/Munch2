@@ -24,7 +24,6 @@ class FoodRepository {
         final double rRating = (restaurantJson['rating'] is num)
             ? (restaurantJson['rating'] as num).toDouble()
             : double.tryParse(restaurantJson['rating']?.toString() ?? '') ?? 0.0;
-        final String rDelivery = (restaurantJson['deliveryTime'] ?? '').toString();
 
         final restaurant = Restaurant(
           id: rId,
@@ -32,7 +31,6 @@ class FoodRepository {
           logoUrl: rLogo,
           location: rLocation,
           rating: rRating,
-          deliveryTime: rDelivery,
         );
 
         final String id = (entry['id'] ?? '').toString();

@@ -11,6 +11,5 @@ class Restaurant {
     required this.logoUrl,
     required this.location,
     required this.rating, 
-    required String deliveryTime,
   });
 }
