@@ -10,6 +10,6 @@ class Restaurant {
     required this.name,
     required this.logoUrl,
     required this.location,
-    required this.rating,
+    required this.rating, 
   });
 }
