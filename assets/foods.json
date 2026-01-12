@@ -4,11 +4,10 @@
     "name": "California Roll",
     "price": 8.5,
     "description": "Crab, avocado, and cucumber wrapped in sushi rice and nori",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/6/60/California_Roll.jpg",
+    "imageUrl": "https://www.cheaprecipeblog.com/wp-content/uploads/2021/06/How-to-make-cheap-California-rolls.jpg",
     "restaurant": {
       "id": "r3",
       "name": "Tokyo Sushi",
-      "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1b/Sushi_icon.png",
       "location": "Phnom Penh",
       "rating": 4.6,
       "deliveryTime": "25–35 min"
@@ -19,11 +18,10 @@
     "name": "Margherita Pizza",
     "price": 12.99,
     "description": "Classic pizza with tomato sauce, mozzarella, and fresh basil",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Margherita_Originale.jpg",
+    "imageUrl": "https://www.cookingclassy.com/wp-content/uploads/2017/08/margherita-pizza-9.jpg",
     "restaurant": {
       "id": "r2",
       "name": "Pizza Palace",
-      "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Pizza-3007395.jpg",
       "location": "Siem Reap",
       "rating": 4.4,
       "deliveryTime": "20–30 min"

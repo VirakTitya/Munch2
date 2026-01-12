@@ -6,29 +6,57 @@ import '../../domain/model/restaurant.dart';
 class FoodRepository {
   /// Load all foods from JSON
   Future<List<FoodItem>> getFoods() async {
-    final jsonString = await rootBundle.loadString('assets/foods.json');
-    final List<dynamic> jsonList = json.decode(jsonString);
+    try {
+      final jsonString = await rootBundle.loadString('assets/foods.json');
+      final List<dynamic> jsonList = json.decode(jsonString);
 
-    return jsonList.map((json) {
-      final restaurantJson = json['restaurant'];
-      final restaurant = Restaurant(
-        id: restaurantJson['id'],
-        name: restaurantJson['name'],
-        logoUrl: restaurantJson['logoUrl'],
-        location: restaurantJson['location'],
-        rating: (restaurantJson['rating'] as num).toDouble(),
-        deliveryTime: restaurantJson['deliveryTime'],
-      );
+      // Parse each item defensively to avoid Null type errors
+      final List<FoodItem> items = [];
+      for (var i = 0; i < jsonList.length; i++) {
+        final entry = jsonList[i] as Map<String, dynamic>;
 
-      return FoodItem(
-        id: json['id'],
-        name: json['name'],
-        price: (json['price'] as num).toDouble(),
-        description: json['description'],
-        imageUrl: json['imageUrl'],
-        restaurant: restaurant,
-      );
-    }).toList();
+        final restaurantJson = (entry['restaurant'] ?? {}) as Map<String, dynamic>;
+
+        final String rId = (restaurantJson['id'] ?? 'unknown').toString();
+        final String rName = (restaurantJson['name'] ?? 'Unknown').toString();
+        final String rLogo = (restaurantJson['logoUrl'] ?? '').toString();
+        final String rLocation = (restaurantJson['location'] ?? '').toString();
+        final double rRating = (restaurantJson['rating'] is num)
+            ? (restaurantJson['rating'] as num).toDouble()
+            : double.tryParse(restaurantJson['rating']?.toString() ?? '') ?? 0.0;
+        final String rDelivery = (restaurantJson['deliveryTime'] ?? '').toString();
+
+        final restaurant = Restaurant(
+          id: rId,
+          name: rName,
+          logoUrl: rLogo,
+          location: rLocation,
+          rating: rRating,
+          deliveryTime: rDelivery,
+        );
+
+        final String id = (entry['id'] ?? '').toString();
+        final String name = (entry['name'] ?? '').toString();
+        final double price = (entry['price'] is num)
+            ? (entry['price'] as num).toDouble()
+            : double.tryParse(entry['price']?.toString() ?? '') ?? 0.0;
+        final String description = (entry['description'] ?? '').toString();
+        final String imageUrl = (entry['imageUrl'] ?? '').toString();
+
+        items.add(FoodItem(
+          id: id,
+          name: name,
+          price: price,
+          description: description,
+          imageUrl: imageUrl,
+          restaurant: restaurant,
+        ));
+      }
+
+      return items;
+    } catch (e, st) {
+      throw Exception('Failed to load assets/foods.json: $e\n$st');
+    }
   }
 
   /// Filter foods by restaurant

@@ -52,11 +52,24 @@ class _HomeScreenState extends State<HomeScreen> {
       body: FutureBuilder<List<FoodItem>>(
         future: _foodsFuture,
         builder: (context, snapshot) {
-          if (!snapshot.hasData) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           }
 
-          final foods = snapshot.data!;
+          if (snapshot.hasError) {
+            return Center(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text('Failed to load foods: ${snapshot.error}'),
+              ),
+            );
+          }
+
+          final foods = snapshot.data ?? [];
+
+          if (foods.isEmpty) {
+            return const Center(child: Text('No food items available'));
+          }
 
           return PageView.builder(
             scrollDirection: Axis.vertical,
