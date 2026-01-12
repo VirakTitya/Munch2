@@ -1,0 +1,19 @@
+[
+    {
+      "id": "r1",
+      "name": "Pizza Heaven",
+      "logoUrl": "https://example.com/logo1.jpg",
+      "location": "Downtown",
+      "rating": 4.7,
+      "deliveryTime": "30-40 min"
+    },
+    {
+      "id": "r2",
+      "name": "Burger Corner",
+      "logoUrl": "https://example.com/logo2.jpg",
+      "location": "Uptown",
+      "rating": 4.5,
+      "deliveryTime": "25-35 min"
+    }
+  ]
+  

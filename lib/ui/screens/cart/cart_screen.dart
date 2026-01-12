@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:munch2/domain/model/cart.dart';
+import 'package:munch2/domain/model/cart_item.dart';
 import 'package:munch2/domain/service/order_service.dart';
 import 'package:munch2/ui/screens/order/order_screen.dart';
 import 'package:munch2/ui/screens/cart/app_string.dart';
 import 'package:munch2/ui/widgets/location_card.dart';
 import 'package:munch2/ui/widgets/location_sheet.dart';
 import '../../widgets/cart_item_card.dart';
-
-
 
 
 class CartScreen extends StatefulWidget {
@@ -34,7 +33,7 @@ class _CartScreenState extends State<CartScreen> {
   late Cart cart;
   late OrderService orderService;
 
-  String deliveryLocation = 'Home • Toul Kork, Phnom Penh';
+  String deliveryLocation = 'Select Your Location';
 
   @override
   void initState() {
@@ -79,6 +78,19 @@ class _CartScreenState extends State<CartScreen> {
       );
   }
 
+  void _increaseItem(CartItem item) {
+  orderService.increase(cart, item.food);
+  setState(() {});
+  widget.onCartUpdated?.call(cart);
+}
+
+void _decreaseItem(CartItem item) {
+  orderService.decrease(cart, item.food);
+  setState(() {});
+  widget.onCartUpdated?.call(cart);
+}
+
+
   @override
   Widget build(BuildContext context) {
     final subtotal = cart.totalPrice;
@@ -91,7 +103,6 @@ class _CartScreenState extends State<CartScreen> {
       ),
       body: Column(
         children: [
-          // Cart items
           Expanded(
             child: cart.items.isEmpty
                 ? const Center(child: Text(AppStrings.emptyCart))
@@ -102,16 +113,8 @@ class _CartScreenState extends State<CartScreen> {
                       final cartItem = cart.items[index];
                       return CartItemCard(
                         cartItem: cartItem,
-                        onIncrease: () {
-                          orderService.increase(cart, cartItem.food);
-                          setState(() {}); // rebuild UI
-                          widget.onCartUpdated?.call(cart);
-                        },
-                        onDecrease: () {
-                          orderService.decrease(cart, cartItem.food);
-                          setState(() {});
-                          widget.onCartUpdated?.call(cart);
-                        },
+                        onIncrease: () => _increaseItem(cartItem),
+                        onDecrease: () => _decreaseItem(cartItem),
                       );
                     },
                   ),
@@ -140,7 +143,7 @@ class _CartScreenState extends State<CartScreen> {
                   width: double.infinity,
                   child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.deepOrangeAccent, // Set button color to orange
+                    backgroundColor: Colors.deepOrangeAccent, 
                   ),
                   onPressed: _checkout,
                   child: const Text(AppStrings.checkout),

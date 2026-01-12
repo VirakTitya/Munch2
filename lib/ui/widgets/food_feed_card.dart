@@ -23,13 +23,12 @@ class FoodFeedCard extends StatelessWidget {
           child: Image.network(
             food.imageUrl,
             fit: BoxFit.cover,
-            errorBuilder: (context, error, stackTrace) => Container(
-              color: Colors.grey[300],
-              child: const Center(
-                child: Icon(Icons.image, size: 50, color: Colors.grey),
-              ),
-            ),
-          ),
+            errorBuilder: (context, error, stackTrace) {
+              return const Center(
+                child: Icon(Icons.image_not_supported, color: Colors.white),
+              );
+            },
+          )
         ),
 
         // Gradient overlay

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:munch2/data/repository/food_repository.dart';
+import 'package:munch2/data/repository/restaurant_repository.dart';
 import 'package:munch2/domain/model/cart.dart';
 import 'package:munch2/domain/service/order_service.dart';
 
@@ -19,19 +21,26 @@ class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
 
   Cart cart = Cart.empty();
-  final OrderService orderService = OrderService(); // Track orders
+  final OrderService orderService = OrderService(); 
+
+  final FoodRepository foodRepository = FoodRepository();
+  final RestaurantRepository restaurantRepository = RestaurantRepository();
 
   @override
   Widget build(BuildContext context) {
     final List<Widget> screens = [
-      HomeScreen(
+       HomeScreen(
         cart: cart,
         orderService: orderService,
+        foodRepository: foodRepository,
         onCartUpdated: (updatedCart) => setState(() => cart = updatedCart),
         onGoToOrders: () => setState(() => _currentIndex = 3),
       ),
       SearchScreen(
         cart: cart,
+        orderService: orderService,
+        foodRepository: foodRepository,
+        restaurantRepository: restaurantRepository,
         onCartUpdated: (updatedCart) => setState(() => cart = updatedCart),
       ),
       CartScreen(

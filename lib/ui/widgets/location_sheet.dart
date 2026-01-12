@@ -1,8 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:munch2/data/mock/mock_location.dart';
+import 'package:munch2/data/repository/mock_location.dart';
 
 class LocationPickerSheet {
   static Future<String?> show(BuildContext context) {
+
+    Widget tile({
+    required BuildContext context,
+    required IconData icon,
+    required Color color,
+    required String title,
+    required String subtitle,
+    required String value,
+  }) {
+    return ListTile(
+      leading: Icon(icon, color: color),
+      title: Text(title),
+      subtitle: Text(subtitle),
+      onTap: () => Navigator.pop(context, value),
+    );
+  }
     return showModalBottomSheet<String>(
       context: context,
       shape: const RoundedRectangleBorder(
@@ -23,7 +39,6 @@ class LocationPickerSheet {
                 ),
               ),
               const SizedBox(height: 16),
-
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16),
                 child: Align(
@@ -37,11 +52,9 @@ class LocationPickerSheet {
                   ),
                 ),
               ),
-
               const SizedBox(height: 12),
-
               ...mockLocations.map(
-                (location) => _tile(
+                (location) => tile(
                   context: context,
                   icon: location.icon,
                   color: location.color,
@@ -50,8 +63,6 @@ class LocationPickerSheet {
                   value: location.value,
                 ),
               ),
-
-              const SizedBox(height: 12),
             ],
           ),
         );
@@ -59,19 +70,3 @@ class LocationPickerSheet {
     );
   }
 }
-
-  Widget _tile({
-    required BuildContext context,
-    required IconData icon,
-    required Color color,
-    required String title,
-    required String subtitle,
-    required String value,
-  }) {
-    return ListTile(
-      leading: Icon(icon, color: color),
-      title: Text(title),
-      subtitle: Text(subtitle),
-      onTap: () => Navigator.pop(context, value),
-    );
- }

@@ -15,10 +15,4 @@ class AppStrings {
   static const delivery = 'Delivery';
   static const total = 'Total';
   static const deliveryFee = 2.0;
-
-  // Locations
-  static const useCurrentLocation = 'Use Current Location';
-  static const detectingLocation = "We'll detect your location automatically";
-  static const home = 'Home';
-  static const office = 'Office';
 }
