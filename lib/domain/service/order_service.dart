@@ -56,4 +56,8 @@ class OrderService {
   void clearOrders() {
     _orders.clear();
   }
+
+  void clearCart(Cart cart) {
+    cart.items.clear();
+  }
 }

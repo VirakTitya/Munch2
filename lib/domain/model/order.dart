@@ -1,6 +1,5 @@
 import 'cart.dart';
 import 'cart_item.dart';
-import 'package:munch2/ui/screens/cart/app_string.dart';
 
 class Order {
   final String id;
@@ -21,7 +20,7 @@ class Order {
       items: cart.items
           .map((e) => CartItem(food: e.food, quantity: e.quantity))
           .toList(),
-      total: cart.totalPrice + AppStrings.deliveryFee,
+      total: cart.totalPrice,
       orderTime: DateTime.now(),
     );
   }

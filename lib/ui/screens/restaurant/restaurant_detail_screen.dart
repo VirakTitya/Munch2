@@ -52,9 +52,7 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
       future: _foodsFuture,
       builder: (context, snapshot) {
         if (!snapshot.hasData) return const Center(child: CircularProgressIndicator());
-
         final foods = widget.foodRepository.getFoodsByRestaurant(snapshot.data!, widget.restaurant);
-
         return Scaffold(
           body: Column(
             children: [
@@ -110,7 +108,6 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                   ),
                 ],
               ),
-
               // Food list
               Expanded(
                 child: ListView.builder(
@@ -118,7 +115,6 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                   itemCount: foods.length,
                   itemBuilder: (context, index) {
                     final food = foods[index];
-
                     return Card(
                       margin: const EdgeInsets.only(bottom: 16),
                       shape: RoundedRectangleBorder(
