@@ -1,112 +1,133 @@
 import 'package:flutter/material.dart';
-import 'package:munch2/model/cart.dart';
-import 'package:munch2/model/cart_item.dart';
-import 'package:munch2/data/mock/mock_food.dart';
+import '../../../domain/model/cart.dart';
+import '../../../domain/model/food_item.dart';
+import '../../../domain/service/order_service.dart';
+import '../../../data/repository/food_repository.dart';
 import '../../widgets/food_feed_card.dart';
-import '../cart/cart_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   final Cart cart;
+  final OrderService orderService;
+  final FoodRepository foodRepository;
   final ValueChanged<Cart>? onCartUpdated;
   final VoidCallback? onGoToOrders;
 
-  const HomeScreen({super.key, required this.cart, this.onCartUpdated, this.onGoToOrders});
+  const HomeScreen({
+    super.key,
+    required this.cart,
+    required this.orderService,
+    required this.foodRepository,
+    this.onCartUpdated,
+    this.onGoToOrders,
+  });
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late Cart cart; // local copy to keep UI snappy; synced with widget.cart
+  late Cart cart;
+  late Future<List<FoodItem>> _foodsFuture;
 
   @override
   void initState() {
     super.initState();
     cart = widget.cart;
+    _foodsFuture = widget.foodRepository.getFoods();
   }
 
-  @override
-  void didUpdateWidget(covariant HomeScreen oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.cart != oldWidget.cart) {
-      setState(() {
-        cart = widget.cart;
-      });
+  String? _cartRestaurantId() {
+    if (cart.items.isEmpty) return null; 
+    return cart.items.first.food.restaurant.id;
+  }
+
+  void _showMessage(String message) {
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  Future<bool?> _showReplaceDialog(FoodItem food) {
+    return showDialog<bool>(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Replace cart items?'),
+        content: Text(
+          'Your cart has items from another restaurant.\n'
+          'Clear the cart and add "${food.name}" from ${food.restaurant.name}?',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(false),
+            child: const Text('Cancel'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(ctx).pop(true),
+            child: const Text('Add to cart'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _confirmReplaceAndAdd(FoodItem food) async {
+    final confirmed = await _showReplaceDialog(food);
+    if (confirmed != true) return; 
+
+    widget.orderService.clearCart(cart);
+    widget.orderService.addItem(cart, food);
+    widget.onCartUpdated?.call(cart);
+    _showMessage('Cart replaced and item added');
+  }
+
+  void _addToCart(FoodItem food) {
+    final currentRestaurantId = _cartRestaurantId();
+    final newRestaurantId = food.restaurant.id;
+
+    if (currentRestaurantId != null && currentRestaurantId != newRestaurantId) {
+      _confirmReplaceAndAdd(food);
+      return;
     }
+
+    widget.orderService.addItem(cart, food);
+    widget.onCartUpdated?.call(cart);
+    _showMessage('Item added to cart');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: PageView.builder(
-        scrollDirection: Axis.vertical,
-        itemCount: mockFoods.length,
-        itemBuilder: (context, index) {
-          final food = mockFoods[index];
+      body: FutureBuilder<List<FoodItem>>(
+        future: _foodsFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
 
-          return FoodFeedCard(
-            food: food,
-            onAddToCart: () async {
-              final existing = cart.items;
-              final conflict = existing.isNotEmpty && existing.first.item.restaurant.id != food.restaurant.id;
+          if (snapshot.hasError) {
+            return Center(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text('Failed to load foods: ${snapshot.error}'),
+              ),
+            );
+          }
 
-              if (conflict) {
-                final otherName = existing.first.item.restaurant.name;
-                final confirmed = await showDialog<bool>(
-                      context: context,
-                      builder: (ctx) => AlertDialog(
-                        title: const Text('Clear cart?'),
-                        content: Text('Your cart contains items from "$otherName". Clear cart and add this item?'),
-                        actions: [
-                          TextButton(onPressed: () => Navigator.of(ctx).pop(false), child: const Text('Cancel')),
-                          TextButton(onPressed: () => Navigator.of(ctx).pop(true), child: const Text('Clear & Add')),
-                        ],
-                      ),
-                    ) ??
-                    false;
+          final foods = snapshot.data ?? [];
+          if (foods.isEmpty) {
+            return const Center(child: Text('No food items available'));
+          }
 
-                if (!confirmed) return;
-
-                setState(() {
-                  cart = cart.clear(); // Clear the cart
-                });
-                widget.onCartUpdated?.call(cart);
-              }
-
-              try {
-                setState(() {
-                  cart = cart.addItem(CartItem(item: food, quantity: 1)); // Add item to the cart
-                });
-                widget.onCartUpdated?.call(cart);
-
-                final snack = SnackBar(
-                  content: const Text('Item added to cart'),
-                  behavior: SnackBarBehavior.floating,
-                  backgroundColor: Colors.black87,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                  action: SnackBarAction(
-                    label: 'View Cart',
-                    textColor: Colors.green,
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (_) => CartScreen(cart: cart, onCartUpdated: widget.onCartUpdated, onGoToOrders: widget.onGoToOrders), // Pass the cart, callbacks to the CartScreen
-                        ),
-                      );
-                    },
-                  ),
-                );
-
-                ScaffoldMessenger.of(context)
-                  ..hideCurrentSnackBar()
-                  ..showSnackBar(snack);
-              } catch (e) {
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
-              }
+          return PageView.builder(
+            scrollDirection: Axis.vertical,
+            itemCount: foods.length,
+            itemBuilder: (context, index) {
+              final food = foods[index];
+              return FoodFeedCard(
+                food: food,
+                onAddToCart: () => _addToCart(food),
+              );
             },
           );
         },

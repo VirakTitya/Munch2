@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:munch2/model/food_item.dart';
+import 'package:munch2/domain/model/food_item.dart';
 
 
 class FoodFeedCard extends StatelessWidget {
@@ -18,25 +18,33 @@ class FoodFeedCard extends StatelessWidget {
       fit: StackFit.expand,
       children: [
         // Background image
-        Image.network(
-          food.imageUrl,
-          fit: BoxFit.cover,
+        ClipRRect(
+          borderRadius: BorderRadius.circular(16),
+          child: Image.network(
+            food.imageUrl,
+            fit: BoxFit.cover,
+            errorBuilder: (context, error, stackTrace) {
+              return const Center(
+                child: Icon(Icons.image_not_supported, color: Colors.white),
+              );
+            },
+          )
         ),
 
         // Gradient overlay
         Container(
           decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(16)),
             gradient: LinearGradient(
               begin: Alignment.bottomCenter,
               end: Alignment.topCenter,
               colors: [
-                Colors.black12,
+                Colors.black54,
                 Colors.transparent,
               ],
             ),
           ),
         ),
-
         // Content
         Padding(
           padding: const EdgeInsets.all(16),
@@ -55,7 +63,7 @@ class FoodFeedCard extends StatelessWidget {
               const SizedBox(height: 4),
               Text(
                 food.restaurant.name,
-                style: const TextStyle(color: Colors.white70),
+                style: const TextStyle(color: Colors.white70, fontSize: 16),
               ),
               const SizedBox(height: 8),
               Row(
@@ -72,14 +80,16 @@ class FoodFeedCard extends StatelessWidget {
                   ElevatedButton(
                     onPressed: onAddToCart,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.orange,
+                      backgroundColor: Colors.deepOrange,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 8),
                     ),
                     child: const Text(
                       'Add',
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: Colors.white, fontSize: 16),
                     ),
                   ),
                 ],
