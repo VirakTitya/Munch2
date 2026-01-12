@@ -38,6 +38,46 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
   }
 
   void _addToCart(FoodItem food) {
+    // Prevent adding items from a different restaurant
+    if (cart.items.isNotEmpty) {
+      final existingRestaurantId = cart.items.first.food.restaurant.id;
+      if (existingRestaurantId != widget.restaurant.id) {
+        final confirm = showDialog<bool>(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Different restaurant'),
+            content: const Text(
+                'Your cart contains items from another restaurant. Clear the cart and add this item?'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: const Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                child: const Text('Clear cart'),
+              ),
+            ],
+          ),
+        );
+
+        confirm.then((shouldClear) {
+          if (shouldClear == true) {
+            widget.orderService.clearCart(cart);
+            // proceed to add after clearing
+            widget.orderService.addItem(cart, food);
+            widget.onCartUpdated?.call(cart);
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Cart cleared and item added')),
+            );
+            setState(() {});
+          }
+        });
+
+        return;
+      }
+    }
+
     widget.orderService.addItem(cart, food);
     widget.onCartUpdated?.call(cart);
 

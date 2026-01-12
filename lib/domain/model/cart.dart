@@ -6,9 +6,8 @@ class Cart {
   Cart({required this.items});
 
   double get totalPrice =>
-      items.fold(0, (sum, item) => sum + item.subtotal);
+      items.fold(0, (sum, item) => sum + item.subtotal + 2.00);
   static Cart empty() {
     return Cart(items: []);
   }
-  
 }

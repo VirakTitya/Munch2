@@ -143,7 +143,10 @@ class _CartScreenState extends State<CartScreen> {
                       backgroundColor: Colors.deepOrangeAccent,
                     ),
                     onPressed: _checkout,
-                    child: const Text('Checkout'),
+                    child: const Text(
+                      'Checkout',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                 ),
               ],

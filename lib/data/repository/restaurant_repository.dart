@@ -15,7 +15,6 @@ class RestaurantRepository {
         logoUrl: json['logoUrl'],
         location: json['location'],
         rating: (json['rating'] as num).toDouble(),
-        deliveryTime: json['deliveryTime'],
       );
     }).toList();
   }
