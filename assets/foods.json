@@ -1,30 +1,128 @@
 [
   {
-    "id": "f3",
-    "name": "California Roll",
-    "price": 8.5,
-    "description": "Crab, avocado, and cucumber wrapped in sushi rice and nori",
-    "imageUrl": "https://www.cheaprecipeblog.com/wp-content/uploads/2021/06/How-to-make-cheap-California-rolls.jpg",
+    "id": "b1",
+    "name": "Classic Burger",
+    "price": 6.99,
+    "description": "Juicy homemade burger with beef patty, lettuce, tomato, and sauce",
+    "imageUrl": "https://thumbs.dreamstime.com/b/home-made-tasty-burger-meat-cutlet-cheese-wooden-vintage-table-vertical-image-copy-space-133427623.jpg",
     "restaurant": {
-      "id": "r3",
-      "name": "Tokyo Sushi",
+      "id": "r1",
+      "name": "Burger House",
+      "location": "Phnom Penh",
+      "rating": 4.5,
+      "deliveryTime": "20–30 min"
+    }
+  },
+  {
+    "id": "b2",
+    "name": "Cheese Burger",
+    "price": 7.49,
+    "description": "Classic burger topped with melted cheese and fresh vegetables",
+    "imageUrl": "https://thumbs.dreamstime.com/b/vertical-image-appetizing-multilayer-hamburger-dark-background-vertical-image-appetizing-multilayer-hamburger-278445226.jpg",
+    "restaurant": {
+      "id": "r1",
+      "name": "Burger House",
+      "location": "Phnom Penh",
+      "rating": 4.5,
+      "deliveryTime": "20–30 min"
+    }
+  },
+  {
+    "id": "b3",
+    "name": "Double Patty",
+    "price": 9.99,
+    "description": "Double beef patty burger with cheese and crispy lettuce",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdScs6nhFRS8SvUoqQM4dF2LRGKHU9W5vXog&s",
+    "restaurant": {
+      "id": "r1",
+      "name": "Burger House",
+      "location": "Phnom Penh",
+      "rating": 4.5,
+      "deliveryTime": "20–30 min"
+    }
+  },
+  {
+    "id": "b4",
+    "name": "Bacon Burger",
+    "price": 8.49,
+    "description": "Beef burger topped with crispy bacon and cheddar cheese",
+    "imageUrl": "https://thumbs.dreamstime.com/b/spicy-beef-burger-bacon-melted-cheddar-hot-glossy-food-vertical-ad-copy-zone-426133677.jpg",
+    "restaurant": {
+      "id": "r1",
+      "name": "Burger House",
+      "location": "Phnom Penh",
+      "rating": 4.5,
+      "deliveryTime": "20–30 min"
+    }
+  },
+  {
+    "id": "b5",
+    "name": "Mushroom Swiss",
+    "price": 8.99,
+    "description": "Juicy beef burger with sautéed mushrooms and Swiss cheese",
+    "imageUrl": "https://media.istockphoto.com/id/840592542/photo/cheeseburger-on-cutting-board.jpg?s=612x612&w=0&k=20&c=cROk9f72A6y_PZoG5QXcHIea2iCBt54UeXCudYJrVCU=",
+    "restaurant": {
+      "id": "r1",
+      "name": "Burger House",
+      "location": "Phnom Penh",
+      "rating": 4.5,
+      "deliveryTime": "20–30 min"
+    }
+  },
+  {
+    "id": "p1",
+    "name": "Margherita Pizza",
+    "price": 7.99,
+    "description": "Classic pizza with fresh mozzarella, tomato sauce, and basil",
+    "imageUrl": "https://media.istockphoto.com/id/451866291/photo/margherita-pizza.jpg?s=612x612&w=0&k=20&c=9GdIWikoDItvvOlT5djjTPOJHj1s9JFgomcFzA9uKBU=",
+    "restaurant": {
+      "id": "r2",
+      "name": "Pizza Corner",
       "location": "Phnom Penh",
       "rating": 4.6,
       "deliveryTime": "25–35 min"
     }
   },
   {
-    "id": "f2",
-    "name": "Margherita Pizza",
-    "price": 12.99,
-    "description": "Classic pizza with tomato sauce, mozzarella, and fresh basil",
-    "imageUrl": "https://www.cookingclassy.com/wp-content/uploads/2017/08/margherita-pizza-9.jpg",
+    "id": "p2",
+    "name": "Pepperoni Pizza",
+    "price": 8.99,
+    "description": "Pizza loaded with pepperoni slices and melted mozzarella",
+    "imageUrl": "https://www.shutterstock.com/shutterstock/photos/225747550/display_1500/stock-photo-hot-homemade-pepperoni-pizza-ready-to-eat-225747550.jpg",
     "restaurant": {
       "id": "r2",
-      "name": "Pizza Palace",
-      "location": "Siem Reap",
-      "rating": 4.4,
-      "deliveryTime": "20–30 min"
+      "name": "Pizza Corner",
+      "location": "Phnom Penh",
+      "rating": 4.6,
+      "deliveryTime": "25–35 min"
+    }
+  },
+  {
+    "id": "p3",
+    "name": "Hawaiian Pizza",
+    "price": 9.49,
+    "description": "Pizza with ham, pineapple, mozzarella, and tomato sauce",
+    "imageUrl": "https://thumbs.dreamstime.com/b/tasty-pizza-salami-shrimp-mozzarella-arugula-vertica-wooden-table-vertical-macro-76325377.jpg",
+    "restaurant": {
+      "id": "r2",
+      "name": "Pizza Corner",
+      "location": "Phnom Penh",
+      "rating": 4.6,
+      "deliveryTime": "25–35 min"
+    }
+  },
+  {
+    "id": "p4",
+    "name": "BBQ Chicken Pizza",
+    "price": 10.25,
+    "description": "Pizza topped with BBQ chicken, onions, and mozzarella cheese",
+    "imageUrl": "https://fedandfit.com/wp-content/uploads/2022/02/230622_bbq-chicken-pizza-13-scaled.jpg",
+    "restaurant": {
+      "id": "r2",
+      "name": "Pizza Corner",
+      "location": "Phnom Penh",
+      "rating": 4.6,
+      "deliveryTime": "25–35 min"
     }
   }
 ]
